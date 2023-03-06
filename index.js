@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
+const bodyParse = require('body-parse');
 const { Configuration, OpenAIApi } = require('openai');
 
 const app = express(); // Create app object
@@ -14,6 +15,7 @@ const publicPath = path.join(__dirname, 'public'); // https://www.youtube.com/wa
 app.use(express.static(publicPath));
 // Body parse
 app.use(express.json());
+app.use(bodyParse.json());
 app.use(express.urlencoded({ extended: false }));
 
 async function chat(message) {
