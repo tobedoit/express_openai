@@ -42,7 +42,7 @@
       const query = ask.value;
       ask.value = '';
       ask.focus();
-      const response = await fetch('/', {
+      const response = await fetch('https://beautiful-raindrop-44627b.netlify.app/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query })
