@@ -44,12 +44,5 @@ app.post('/', async (req, res) => {
 //   });
 // });
 
-// export your app as a function
-exports.handler = async (event, context) => {
-  // handle the incoming request
-  const response = await app(event, context);
-  return response;
-};
-
 // Listening
-// app.listen(3000);
+app.listen(3000);
