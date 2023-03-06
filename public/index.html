@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- https://www.youtube.com/watch?v=rdWavi2M2HE -->
+  <title>Chatting with openAI by zmes</title>
+</head>
+<body>
+  <style>
+    .chat-content { height: 100%; overflow-y: scroll; }
+    .line { margin-top: 10px; display: flex; }
+    .chat-box { background: #eee; padding: 5px; max-width: 200px; }
+    .mine { margin-left: auto; }
+    .container { position: absolute; bottom: 0; padding-bottom: 10px; }
+  </style>
+  <div class="chat-content">
+    <div class="line">
+      <span class="chat-box">안녕???</span>
+    </div>
+    <div class="line">
+      <span class="chat-box mine">안녕!</span>
+    </div>
+    <div class="container">
+      <input class="chat-box" id="input">
+      <button id="send">전송</button>
+    </div>
+  </div>
+  <script>
+    const ask = document.querySelector('#input');
+    const send = document.querySelector('#send');
+    const content = document.querySelector('.chat-content');
+
+    ask.addEventListener('keyup', function(event) {
+      if (event.keyCode === 13) { // 13 is the key code for the "enter" key
+        event.preventDefault(); // prevent the default action of the enter key
+        send.click(); // simulate a click on the button
+      }
+    });
+
+    send.addEventListener('click', async () => {
+      let ask_temp = `<div class="line"><span class="chat-box mine">${ask.value}</span></div>`
+      content.insertAdjacentHTML('beforeend', ask_temp);
+      const query = ask.value;
+      ask.value = '';
+      ask.focus();
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query })
+      });
+      const data = await response.json(); // index.js(서버)에서 받은 json answer를 Javascript 객체로 파싱
+      // console.log(data.answer); // index.js 에서 res.json({ answer });
+      // conso/le.log(data); // index.js 에서 res.json(answer);
+      let res_temp = `<div class="line"><span class="chat-box">${data.answer}</span></div>`;
+      content.insertAdjacentHTML('beforeend', res_temp);
+
+      
+    });
+  </script>
+</body>
+</html>
