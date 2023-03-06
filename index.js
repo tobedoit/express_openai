@@ -14,7 +14,7 @@ const publicPath = path.join(__dirname, 'public'); // https://www.youtube.com/wa
 // }))
 app.use(express.static(publicPath));
 // Body parse
-app.use(express.json());
+// app.use(express.json());
 app.use(bodyParse.json());
 app.use(express.urlencoded({ extended: false }));
 
