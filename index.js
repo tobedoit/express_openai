@@ -18,7 +18,6 @@ app.use(express.urlencoded({ extended: false }));
 
 async function chat(message) {
   const configuration = new Configuration({
-    // apiKey: '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',
     apiKey: process.env.OPENAI_API_KEY, // https://www.youtube.com/watch?v=UQamG425RD0 (required : npm i dotenv)
   });
   const openai = new OpenAIApi(configuration);
