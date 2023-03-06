@@ -47,7 +47,7 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query })
       });
-      const data = await response.text(); // index.js(서버)에서 받은 json answer를 Javascript 객체로 파싱
+      const data = await response.json(); // index.js(서버)에서 받은 json answer를 Javascript 객체로 파싱
       // console.log(data.answer); // index.js 에서 res.json({ answer });
       // conso/le.log(data); // index.js 에서 res.json(answer);
       let res_temp = `<div class="line"><span class="chat-box">${data.answer}</span></div>`;
