@@ -1,11 +1,16 @@
 require('dotenv').config();
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
 const { Configuration, OpenAIApi } = require('openai');
 
 const app = express(); // Create app object
 const publicPath = path.join(__dirname, 'public'); // https://www.youtube.com/watch?v=ljVwKLLCEYg
 
+app.use(cors({
+  origin: 'https://beautiful-raindrop-44627b.netlify.app',
+  credentials: true
+}))
 app.use(express.static(publicPath));
 // Body parse
 app.use(express.json());
