@@ -7,10 +7,10 @@ const { Configuration, OpenAIApi } = require('openai');
 const app = express(); // Create app object
 const publicPath = path.join(__dirname, 'public'); // https://www.youtube.com/watch?v=ljVwKLLCEYg
 
-app.use(cors({
-  origin: 'https://beautiful-raindrop-44627b.netlify.app',
-  credentials: true
-}))
+// app.use(cors({
+//   origin: 'https://beautiful-raindrop-44627b.netlify.app',
+//   credentials: true
+// }))
 app.use(express.static(publicPath));
 // Body parse
 app.use(express.json());
@@ -33,7 +33,9 @@ async function chat(message) {
   });
   return response.data.choices[0].text;
 }
-
+app.get('/', async (req, res) => {
+  res.sendFile(__dirname + '/public/index.html');
+})
 app.post('/', async (req, res) => {
   const answer = await chat(req.body.query);
   res.json({ answer }); // 보내는건 json 형태의 객체이다 compared to res.send() method
